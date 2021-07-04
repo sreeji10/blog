@@ -1,0 +1,111 @@
+baseurl = "https://themlblog.com"
+title = "Machine Learning"
+theme = "hugo-theme-cleanwhite"
+languageCode = "en-us"
+disqusShortname = ""
+googleAnalytics = ""
+preserveTaxonomyNames = true
+paginate = 5 #frontpage pagination
+hasCJKLanguage = false
+
+[outputs]
+home = ["HTML", "RSS", "Algolia"]
+
+[params]
+  header_image = "img/home_page_bg.JPG"
+  SEOTitle = "The ML Blog"
+  description = "Machine Learning Blog"
+  keyword = "machine learning, deep learning, python, docker"
+  slogan = "Machine Learning and Deep Learning topics"
+  email = "sreejith1312@gmail.com"
+
+  image_404 = "img/404-bg.jpg"
+  title_404 = "Not Found :("
+  omit_categories = true
+
+  # leancloud storage for page view counter
+  page_view_conter = false 
+  leancloud_app_id = ""
+  leancloud_app_key = ""
+
+  # algolia site search
+  algolia_search = false
+  algolia_appId = ""
+  algolia_indexName = ""
+  algolia_apiKey = ""
+
+  # Sidebar settings
+  sidebar_about_description = "Machine Learning Engineer. Python. ML, DL. Keras."
+  sidebar_avatar = "img/me_homepage.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+  featured_tags = true
+  featured_condition_size = 1 
+
+  reward = false
+
+  friends = false
+  bookmarks = false
+  about_me = true
+
+  # Include any custom CSS and/or JS files, url or relative to /static folder
+  custom_css = ["css/main.css"]
+  #custom_css = ["css/lightbox.css", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css", "css/main.css"]
+  #custom_js = ["js/lightbox.js", "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js", "js/main.js"]
+
+  # Highlight.js theme
+  # demo: https://highlightjs.org/static/demo/
+  highlightjs = "docco"
+
+  [params.social]
+  rss            = false 
+  email          = "sreejith1312@gmail.com"
+  #facebook      = "full profile url in facebook"
+  #googleplus    = "full profile url in googleplus"
+  #twitter       = "full profile url in twitter"
+  linkedin       = "https://www.linkedin.com/in/yourlinkedinid"
+  #stackoverflow  = "https://stackoverflow.com/users/yourstackoverflowid"
+  #instagram     = "full profile url in instagram"
+  github         = "https://github.com/sreeji10"
+  #wechat         = "your wechat qr code image"
+  #medium         = "full profile url in medium"
+  #pinterest     = "full profile url in pinterest"
+  #reddit        = "full profile url in reddit"
+  #gitlab        = "full profile url in gitlab"
+  #mastodon      = "full profile url in mastodon"
+  #keybase       = "full profile url in keybase"
+  #git           = "full profile url for git user"
+  
+  [[params.friend_link]]
+  title = ""
+  href =  ""
+
+  #[[params.bookmark_link]]
+  #title =  ""
+  #href =  ""
+  
+  [[params.addtional_menus]]
+  title =  "BLOG"
+  href =  "/post/"
+  [[params.addtional_menus]]
+  title =  "PROJECTS"
+  href =  "/top/project/"
+  [[params.addtional_menus]]
+  title =  "ABOUT"
+  href =  "/top/about/"
+
+[outputFormats.Algolia]
+baseName = "algolia"
+isPlainText = true
+mediaType = "application/json"
+notAlternative = true
+
+[params.algolia]
+vars = ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
+params = ["categories", "tags"] 
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 3
+    startLevel = 1
+  [markup.goldmark.renderer]
+    unsafe = true

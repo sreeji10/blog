@@ -1,0 +1,63 @@
+{{ $.Scratch.Add "width" (.Get "width" | default "100%") }}
+{{ $.Scratch.Add "height" (.Get "height" | default "300px") }}
+{{ $.Scratch.Add "auto-slide" (.Get "auto-slide" | default "0") }}
+
+{{ $.Scratch.Add "arrow-left" (.Get "arrow-left" | default "fa-chevron-left") }}
+{{ $.Scratch.Add "arrow-right" (.Get "arrow-right" | default "fa-chevron-right") }}
+
+{{ $.Scratch.Add "id" (.Get "id" | default "") }}{{ if ne (.Get "no-fa") "true" }}
+    <!-- FontAwesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+{{end}}
+
+{{ if ne (.Get "no-jquery") "true" }}
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+{{end}}
+
+<style>
+.my-chevron {
+    width:30px;
+    height:30px;
+    margin-top:-10px;
+    font-size: 30px;
+    top:50%;
+    position:absolute;
+    display:inline-block;
+};
+</style>
+    
+<!-- Gallery -->
+<div id="slide-{{ $.Scratch.Get "id" }}" class="carousel slide" data-ride="carousel">
+  {{- with (.Get "dir") -}} 
+      {{- $files := readDir (print "/static/" .) }} 
+      {{ if gt (len $files) 1 }}
+        <ol class="carousel-indicators">
+            <li data-target='#slide-{{ $.Scratch.Get "id" }}' data-slide-to="0" class="active"></li>
+          {{- range (seq 1 (sub (len $files) 1)) }}
+            <li data-target='#slide-{{ $.Scratch.Get "id" }}' data-slide-to="{{.}}"></li>
+          {{- end }}
+        </ol>
+      {{ end }}
+      <div class="carousel-inner">
+        {{- range first 1 $files -}} 
+          {{- $absoluteUrl := print ($.Get "dir") "/" .Name | absURL }}
+          <div class="item active"><img class="slide-{{ $.Scratch.Get "id" }}" src="{{ $absoluteUrl }}"></div>
+        {{- end }} 
+        {{- range after 1 $files -}} 
+          {{- $absoluteUrl := print ($.Get "dir") "/" .Name | absURL }}
+          <div class="item"><img class="slide-{{ $.Scratch.Get "id" }}" src="{{ $absoluteUrl }}"></div>
+        {{- end }} 
+      </div>
+    {{ if gt (len $files) 1 }}
+      <a class="left carousel-control" href="#slide-{{ $.Scratch.Get "id" }}" data-slide="prev">
+        <span class="fa fa-chevron-left my-chevron"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#slide-{{ $.Scratch.Get "id" }}" data-slide="next">
+        <span class="fa fa-chevron-right my-chevron"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    {{ end }}
+  {{- end }}
+</div>
